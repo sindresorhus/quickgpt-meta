@@ -22,7 +22,7 @@ layout: null
 			<item>
 				{% assign version = release.tag_name | remove_first:'v' %}
 				<title>{{ version }}</title>
-				<description><![CDATA[{{ release.body | replace: '<!--[^>]*-->', '' | markdownify }}]]></description>
+				<description><![CDATA[{{ release.body | replace: '<!--(.*?)-->', '' | markdownify }}]]></description>
 				<pubDate>{{ release.published_at | date_to_rfc822 }}</pubDate>
 				<sparkle:version>{{ build_version }}</sparkle:version>
 				<sparkle:shortVersionString>{{ version }}</sparkle:shortVersionString>
