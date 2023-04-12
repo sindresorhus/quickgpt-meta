@@ -23,15 +23,16 @@ layout: null
 				<title>{{ release.name }}</title>
 				<description><![CDATA[{{ release.body | markdownify }}]]></description>
 				<pubDate>{{ release.published_at | date_to_rfc822 }}</pubDate>
-				{% assign firstAsset = release.assets | first %}
 				<sparkle:version>{{ build_version }}</sparkle:version>
 				<sparkle:shortVersionString>{{ release.tag_name | remove_first:'v' }}</sparkle:shortVersionString>
 				<sparkle:minimumSystemVersion>13.3</sparkle:minimumSystemVersion>
+				{% assign firstAsset = release.assets | first %}
 				<enclosure
 					url="{{ firstAsset.browser_download_url }}"
 					length="{{ firstAsset.size }}"
 					type="application/octet-stream"
-					sparkle:edSignature="{{ ed_signature }}"/>
+					sparkle:edSignature="{{ ed_signature }}"
+				/>
 			</item>
 		{% endfor %}
 	</channel>
