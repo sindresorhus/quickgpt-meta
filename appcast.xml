@@ -1,0 +1,30 @@
+---
+layout: null
+---
+<?xml version="1.0" standalone="yes"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+	<channel>
+		<title>{{ site.github.project_title }}</title>
+		{% for release in site.github.releases | limit: 5 %}
+			{% if release.draft or release.prerelease %}{% continue %}{% endif %}
+			{% assign version = release.tag_name | remove_first:'v' %}
+			{% assign build_version = release.body | split: "<!-- buildVersion:" | last | split: "-->" | first | strip %}
+			{% assign ed_signature = release.body | split: "<!-- edSignature:" | last | split: "-->" | first | strip %}
+			<item>
+				<title>{{ version }}</title>
+				<description><![CDATA[{{ release.body | strip_html | markdownify }}]]></description>
+				<pubDate>{{ release.published_at | date_to_rfc822 }}</pubDate>
+				<sparkle:version>{{ build_version }}</sparkle:version>
+				<sparkle:shortVersionString>{{ version }}</sparkle:shortVersionString>
+				<sparkle:minimumSystemVersion>13.1</sparkle:minimumSystemVersion>
+				{% assign firstAsset = release.assets | first %}
+				<enclosure
+					url="{{ firstAsset.browser_download_url }}"
+					length="{{ firstAsset.size }}"
+					type="application/octet-stream"
+					sparkle:edSignature="{{ ed_signature }}"
+				/>
+			</item>
+		{% endfor %}
+	</channel>
+</rss>
