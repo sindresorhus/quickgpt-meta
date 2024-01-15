@@ -5,7 +5,7 @@ layout: null
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
 	<channel>
 		<title>{{ site.github.project_title }}</title>
-		{% for release in site.github.releases | limit: 3 %}
+		{% for release in site.github.releases | limit: 2 %}
 			{% if release.draft or release.prerelease %}{% continue %}{% endif %}
 			{% assign version = release.tag_name | remove_first:'v' %}
 			{% assign build_version = release.body | split: "<!-- buildVersion:" | last | split: "-->" | first | strip %}
