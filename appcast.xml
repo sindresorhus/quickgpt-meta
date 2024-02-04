@@ -16,7 +16,7 @@ layout: null
 				<pubDate>{{ release.published_at | date_to_rfc822 }}</pubDate>
 				<sparkle:version>{{ build_version }}</sparkle:version>
 				<sparkle:shortVersionString>{{ version }}</sparkle:shortVersionString>
-				<sparkle:minimumSystemVersion>13.5</sparkle:minimumSystemVersion>
+				<sparkle:minimumSystemVersion>14.1</sparkle:minimumSystemVersion>
 				{% assign firstAsset = release.assets | first %}
 				<enclosure
 					url="{{ firstAsset.browser_download_url }}"
